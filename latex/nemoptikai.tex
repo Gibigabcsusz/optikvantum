@@ -1,0 +1,190 @@
+\documentclass[12pt,a4paper,oneside]{article}
+% nagyon sok kép esetén meggyorsítható a fordítás a draft móddal
+% \documentclass[12pt,a4paper,oneside,draft]{report}
+% ekkor a képek nem renderelődnek ki, csak placeholder lesz mérethelyesen
+\usepackage[utf8]{inputenc} % mindenképp maradjon az utf-8 kódolás
+\usepackage[magyar]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics} % grafikus elemek, képek berakásához
+%\usepackage{epsfig} % eps importáláshoz
+%\usepackage{listings}
+%\usepackage{sectsty}
+%\usepackage{enumerate}
+\usepackage{siunitx} % ezzel lehet hivatalosan megformázni: szám + mértékegység
+%\usepackage{lastpage}
+\usepackage{setspace}
+\usepackage{hyperref} % PDF hivatkozásokhoz kell
+\usepackage[hang]{caption}
+%\usepackage{titling} % a title, author parancsok szabad használatához
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage[hyphenbreaks]{breakurl}
+% A legendás siunitx package, ami a mértékegységek leírásának
+% leghivatalosabb módja, ezeket a makrókat definiálja:
+
+% használat: \SI[per-mode=symbol]{12345,678}{\kilo\amper\per\kandela\tothe{9}}
+% ilyesmi lesz, csak jobb: 12345.67\, kAcd^{-9}
+
+% egyszerűbb eset: \SI{50}{\ohm}
+
+
+%% SI alapegységek:
+% amper         -   \ampere
+% kandela       -   \candela
+% kelvin        -   \kelvin
+% kilogramm     -   \kilogram
+% méter         -   \metre  (!!)
+% mól           -   \mole
+% másodperc     -   \second
+
+%% Származtatott SI egységek:
+% becquerel     -   \becquerel
+% celziusz fok  -   \degreeCelsius
+% coulomb       -   \coulomb
+% farád         -   \farad
+% gray          -   \gray
+% hertz         -   \hertz
+% henry         -   \henry
+% joule         -   \joule
+% katal         -   \katal
+% lumen         -   \lumen
+% lux           -   \lux
+% newton        -   \newton
+% ohm           -   \ohm
+% pascal        -   \pascal
+% radián        -   \radian
+% siemens       -   \siemens
+% sievert       -   \sievert
+% szteradián    -   \steradian
+% tesla         -   \tesla
+% volt          -   \volt
+% watt          -   \watt
+% weber         -   \weber
+
+%% Elfogadott, nem SI mértékegységek
+% nap           -   \day
+% fok           -   \degree
+% hektár        -   \hectare
+% óra           -   \hour
+% liter         -   \litre ( vagy \liter, de az előző kis "l" lesz, az utóbbi nagy "L")
+% fokperc       -   \arcminute
+% perc          -   \minute
+% fokmásodperc  -   \arcsecond
+% tonna         -   \tonne
+
+%% Kísérleti úton megállapítható nem SI egységek:
+% csillagászati egység      -   \astronomicalunit
+% atomi tömegegység         -   \atomicmassunit
+% bohr                      -   \bohr
+% fénysebesség              -   \clight
+% dalton                    -   \dalton
+% elektrontömeg             -   \electronmass
+% elektronvolt              -   \electronvolt
+% egységtöltés              -   \elementarycharge
+% hartree                   -   \hartree
+% redukált planck állandó   -   \planckbar
+
+%% Más nem SI egységek:
+% ångström          -   \angstrom
+% bár               -   \bar
+% barn              -   \barn
+% bel               -   \bel
+% decibel           -   \decibel
+% csomó             -   \knot
+% higanymilliméter  -   \mmHg
+% tengeri csomó     -   \nauticalmile
+% neper             -   \neper
+
+%% Prefixek:
+% yocto-        -   \yocto  (-24)
+% zepto-        -   \zepto  (-21)
+% atto-         -   \atto   (-18)
+% femto-        -   \femto  (-15)
+% piko-         -   \pico   (-12)
+% nano-         -   \nano   (-9)
+% mikro-        -   \yocto  (-6)
+% milli         -   \milli  (-3)
+% centi-        -   \centi  (-2)
+% deci-         -   \deci   (-1)
+
+% deka-         -   \deca   (1)
+% hekto-        -   \hecto  (2)
+% kilo-         -   \kilo   (3)
+% mega-         -   \mega   (6)
+% giga-         -   \giga   (9)
+% tera-         -   \tera   (12)
+% peta-         -   \peta   (15)
+% exa-          -   \exa    (18)
+% zetta-        -   \zetta  (21)
+% yotta-        -   \yotta  (24)
+
+
+% a TikZ rajzoló modul, és a kapcsolási rajz készítő modul, ha kell
+%\usepackage{tikz}
+%\usepackage{circuitikz}
+
+\pagenumbering{arabic}
+
+\definecolor{rosewood}{rgb}{0.6, 0.0, 0.04}
+\definecolor{indigo(dye)}{rgb}{0.0, 0.25, 0.42}
+
+\usepackage[left=25mm,right=25mm,top=20mm,bottom=25mm]{geometry}\pagestyle{plain}
+
+\singlespacing
+%\onehalfspacing
+
+\def\UrlBreaks{\do\/\do-}
+
+\hypersetup
+{
+  	colorlinks,
+  	citecolor=blue,
+ 	linkcolor=rosewood,
+  	urlcolor=indigo(dye)
+}
+\title{Nem optikai elven működő \\ kvantum véletlenszám generátorok} 
+\author{Szilágyi Gábor}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\section*{Bevezetés}
+A véletlen számokat számos területen használnak. Ide tartozik a kriptográfia, ezen belül például az Internet Of Things (IoT) eszközök közötti kommunikáció, a digitális aláírások, a digitális szolgáltatások felhasználóinak azonosítása, az egyszerhasználatos kulcsok (One-Time Pad) generálása, vagy a banki tranzakciók adminisztrációja. Bizonyos szimulációs eljárásoknál -- elsősorban a Monte-Carlo módszernél -- a szimulációs eredmények helyessége a felhasznált véletlen számok kiszámíthatatlanságán nyugszik. Választások lebonyolításánál és szerencsejátékoknál is fontos a felhasznált véletlen számok kompromittálatlansága, itt elsősorban sorsolásra használják fel a véletlen számokat. Mesterséges intelligenciák evolúciójánál a túlélő példányok kiválasztása, tulajdonságaik összekeverése, valamint a mutációik is fontos, hogy teljesen véletlenszerűek legyenek. Neurális hálóknál az élek véletlenszerű súlyozása is véletlen számokat igényel. Végül, de nem utolsósorban a kriptovalutákat kezelő infrastruktúrákban is fontos szerepe van a véletlen számoknak.
+\par
+A fenti felsorolás messze nem kimerítő, ebből is látszik, hogy a véletlen számok nagy hatással vannak a mai világ működésére. A felhasznált véletlen számok megjósolhatóságának súlyos következményei lehetnek, mert sok esetben teljesen meghiúsítják az őket felhasználó alkalmazások működését, ami nagy veszteségeket okozhat. Ilyen esetekre néhány példa a közelmúltból:
+\begin{itemize}
+	\item 2010-ben a Sony PlayStation 3 játékkonzol 77 millió felhasználójának adatait ellpoták a támadók. A támadáshoz a cég ECDSA (Elliptic Curve Digital Signatura Algorithm) implementációjának hibáját használták ki, ami miatt ugyanazt a számot többször használta fel az algoritmus a felhasználók azonosításához \cite{sony}.
+	\item 2012-ban két kutatócsoport több olyan RSA titkosítási kulcsot hozott napvilágra, amiket addig aktívan használtak az interneten biztonságosnak hitt kulcsként, de feltörhetőek voltak amiatt, hogy nem megfelelő véletlenszám generátort használtak a kulcsok generálásakor \cite{bad-rsa}.
+	\item 2015-ben 18866 Bitcoint loptak el a Bitstamp kriptovaluta tőzsdén, ami az ott forgalomban lévő kriptopénz 12\%-át jelentette ekkor. A támadás kapcsán a véletlen számok hibás generálásának kihasználására utaló nyomok kerültek napvilágra \cite{bitstamp}.
+\end{itemize}
+\section*{A véletlenszerűség definiálása}
+Ugyan elég jól körül lehet írni a valódi véletlent és fel tudunk sorolni olyan tulajdonságokat, amik biztosan igazak egy véletlenszerűen előállított bitsorozatra, de a matematika mai eszköztárával nem sikerült általános, formális definíciót találni a valódi véletlenre.
+\par
+A valódi véletlenszerűség eldöntéséhez a legjobb, amit tehetünk, az a különböző tesztek lefuttatása a vizsgált bitsorozaton. Ezek semmilyen véges hosszú bitsorozatra alkalmazva nem tudnak egyértelmű választ adni arra a kérdésre, hogy az valóban véletlen-e, de a segítségükkel legalább azt el lehet dönteni, hogy a generálás módszere a vizsgált szempontokból mennyire áll közel az igazi véletlenhez.
+%TODO fizikához átvezetés
+\section*{Véletlenszám generátorok}
+Egy véletlenszám generátornak két paramétere kritikus, az egyik a számok megjósolhatatlanságának minősége, a másik a generálás bitsebessége.
+\par
+Bizonyos alkalmazásoknál a két paraméter közül nagy bitsebesség sokkal fontosabb, ekkor megengedhető lehet olyan véletlenszám generátor használata, ami valójában determinisztikus módon hozza létre a kimeneti bitsorozatát, ezek a pszeudo-véletlen generátorok, amelyek gyakran (de nem feltétlenül) szoftveresen vannak implementálva. A pszeudo-véletlenszám generátorok hátránya, hogy a kimeneti bitsorozatuk különböző módokon előre kiszámítható lehet, emiatt nem felelnek meg a tökéletes véletlenszerűség kritériumainak.
+\par
+Ahol a generált bitsorozat ,,minősége'' fontos, ott olyan fizikai folyamatot érdemes alapul venni a bitek előállításához, ami valóban kiszámíthatatlan. Az ilyen folyamatok a klasszikus fizika helyett a kvantumfizika területén keresendőek. A kvantum folyamatok használatának egyik előnye, hogy a véletlen számokkal szemben támasztott követelményeknek automatikusan megfelelnek. A kvantumszámítógépek fejlesztése az elmúlt években olyan szintre jutott, hogy a determinisztikus úton előállított véletlen bitsorozatokat már az a veszély fenyegeti, hogy még ha ugyan klasszikus számítógépekkel nem is, de kvantumszámítógépek segítségével megjósolhatóak lehetnek. Abban rejlik a kvantum véletlenszám generátorok másik előnye, hogy a segítségükkel előállított bitsorozatok elméletileg kvantumszámítógépek segítségével is megjósolhatatlanok.
+\par
+Létezik a fent leírt végletek közötti kompromisszumos megoldás, ami abban áll, hogy egy relatíve lassú kvantum véletlenszám generátor kimenetét egy determinisztikus algoritmusban kiindulási változóként (random seed) használjuk. A determinisztikus algoritmus a saját kimenetén egy a bemenetihez képest sokszoros hosszú bitsorozatot generál, de ez az új bitsorozat az algoritmus paraméterei és a kiindulási változó ismeretében teljesen reprodukálható. Ezért ezzel a megoldással nem minden esetben lehet kiváltani a teljesen kvantum generátort.
+\par
+A fenti okok miatt egyre nő és egyre több alkalmazási területet érint a kvantum folyamatokon alapuló véletlenszám generátorok iránti igény.
+\section*{Radioaktív bomlás alapú generátorok}
+\section*{Alagúteffektus alapú generátorok}
+
+Bibliography
+\\\\
+\begin{thebibliography}{12}
+	\sloppy
+	\bibitem{sony} fail0verflow. Console Hacking 2010, PS3 Epic Fail (2011) \\ \url{https://events.ccc.de/congress/2010/Fahrplan/attachments/1780_27c3_console_hacking_2010.pdf}
+	\bibitem{bad-rsa} Lenstra, A. K., Hughes, J. P., Augier, M., Kleinjung, T. \& Wachter, C. Ron was wrong, whit is right (2012) \\ \url{https://eprint.iacr.org/2012/064.pdf}
+	\bibitem{bitstamp} CNN. Did a Bitcoin Exchange Just Lose 12\% of Its Bitcoins? Possible Bitstamp Hack Address Contains 18,866 Stolen BTC (2015) \\ \url{https://www.ccn.com/bitcoin-exchange-just-lose-12-bitcoins-possible-bitstamp-hack-address-contains-18866-stolen-btc/}
+\end{thebibliography}
+\end{document}
