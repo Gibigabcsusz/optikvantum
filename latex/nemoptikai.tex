@@ -8,123 +8,21 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{graphics} % grafikus elemek, képek berakásához
+\usepackage{graphicx} % grafikus elemek, képek berakásához
 %\usepackage{epsfig} % eps importáláshoz
-%\usepackage{listings}
-%\usepackage{sectsty}
-%\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{sectsty}
+\usepackage{enumerate}
 \usepackage{siunitx} % ezzel lehet hivatalosan megformázni: szám + mértékegység
-%\usepackage{lastpage}
+\usepackage{lastpage}
 \usepackage{setspace}
 \usepackage{hyperref} % PDF hivatkozásokhoz kell
 \usepackage[hang]{caption}
-%\usepackage{titling} % a title, author parancsok szabad használatához
+\usepackage{titling} % a title, author parancsok szabad használatához
 \usepackage{xcolor}
 \usepackage{multicol}
 \usepackage[hyphenbreaks]{breakurl}
-% A legendás siunitx package, ami a mértékegységek leírásának
-% leghivatalosabb módja, ezeket a makrókat definiálja:
 
-% használat: \SI[per-mode=symbol]{12345,678}{\kilo\amper\per\kandela\tothe{9}}
-% ilyesmi lesz, csak jobb: 12345.67\, kAcd^{-9}
-
-% egyszerűbb eset: \SI{50}{\ohm}
-
-
-%% SI alapegységek:
-% amper         -   \ampere
-% kandela       -   \candela
-% kelvin        -   \kelvin
-% kilogramm     -   \kilogram
-% méter         -   \metre  (!!)
-% mól           -   \mole
-% másodperc     -   \second
-
-%% Származtatott SI egységek:
-% becquerel     -   \becquerel
-% celziusz fok  -   \degreeCelsius
-% coulomb       -   \coulomb
-% farád         -   \farad
-% gray          -   \gray
-% hertz         -   \hertz
-% henry         -   \henry
-% joule         -   \joule
-% katal         -   \katal
-% lumen         -   \lumen
-% lux           -   \lux
-% newton        -   \newton
-% ohm           -   \ohm
-% pascal        -   \pascal
-% radián        -   \radian
-% siemens       -   \siemens
-% sievert       -   \sievert
-% szteradián    -   \steradian
-% tesla         -   \tesla
-% volt          -   \volt
-% watt          -   \watt
-% weber         -   \weber
-
-%% Elfogadott, nem SI mértékegységek
-% nap           -   \day
-% fok           -   \degree
-% hektár        -   \hectare
-% óra           -   \hour
-% liter         -   \litre ( vagy \liter, de az előző kis "l" lesz, az utóbbi nagy "L")
-% fokperc       -   \arcminute
-% perc          -   \minute
-% fokmásodperc  -   \arcsecond
-% tonna         -   \tonne
-
-%% Kísérleti úton megállapítható nem SI egységek:
-% csillagászati egység      -   \astronomicalunit
-% atomi tömegegység         -   \atomicmassunit
-% bohr                      -   \bohr
-% fénysebesség              -   \clight
-% dalton                    -   \dalton
-% elektrontömeg             -   \electronmass
-% elektronvolt              -   \electronvolt
-% egységtöltés              -   \elementarycharge
-% hartree                   -   \hartree
-% redukált planck állandó   -   \planckbar
-
-%% Más nem SI egységek:
-% ångström          -   \angstrom
-% bár               -   \bar
-% barn              -   \barn
-% bel               -   \bel
-% decibel           -   \decibel
-% csomó             -   \knot
-% higanymilliméter  -   \mmHg
-% tengeri csomó     -   \nauticalmile
-% neper             -   \neper
-
-%% Prefixek:
-% yocto-        -   \yocto  (-24)
-% zepto-        -   \zepto  (-21)
-% atto-         -   \atto   (-18)
-% femto-        -   \femto  (-15)
-% piko-         -   \pico   (-12)
-% nano-         -   \nano   (-9)
-% mikro-        -   \yocto  (-6)
-% milli         -   \milli  (-3)
-% centi-        -   \centi  (-2)
-% deci-         -   \deci   (-1)
-
-% deka-         -   \deca   (1)
-% hekto-        -   \hecto  (2)
-% kilo-         -   \kilo   (3)
-% mega-         -   \mega   (6)
-% giga-         -   \giga   (9)
-% tera-         -   \tera   (12)
-% peta-         -   \peta   (15)
-% exa-          -   \exa    (18)
-% zetta-        -   \zetta  (21)
-% yotta-        -   \yotta  (24)
-
-
-% a TikZ rajzoló modul, és a kapcsolási rajz készítő modul, ha kell
-%\usepackage{tikz}
-%\usepackage{circuitikz}
 
 \pagenumbering{arabic}
 
@@ -133,10 +31,10 @@
 
 \usepackage[left=25mm,right=25mm,top=20mm,bottom=25mm]{geometry}\pagestyle{plain}
 
-\singlespacing
-%\onehalfspacing
+%\singlespacing
+\onehalfspacing
 
-\def\UrlBreaks{\do\/\do-}
+\def\UrlBreaks{\do\/\do-\do_}
 
 \hypersetup
 {
@@ -148,7 +46,7 @@
 \title{Nem optikai elven működő \\ kvantum véletlenszám generátorok} 
 \author{Szilágyi Gábor}
 \date{\today}
-
+\setlength{\unitlength}{1cm} % fix unit
 
 \begin{document}
 \maketitle
@@ -157,7 +55,7 @@ A véletlen számokat számos területen használnak. Ide tartozik a kriptográf
 \par
 A fenti felsorolás messze nem kimerítő, ebből is látszik, hogy a véletlen számok nagy hatással vannak a mai világ működésére. A felhasznált véletlen számok megjósolhatóságának súlyos következményei lehetnek, mert sok esetben teljesen meghiúsítják az őket felhasználó alkalmazások működését, ami nagy veszteségeket okozhat. Ilyen esetekre néhány példa a közelmúltból \cite{altalanos-random}:
 \begin{itemize}
-	\item 2010-ben a Sony PlayStation 3 játékkonzol 77 millió felhasználójának adatait ellpoták a támadók. A támadáshoz a cég ECDSA (Elliptic Curve Digital Signatura Algorithm) implementációjának hibáját használták ki, ami miatt ugyanazt a számot többször használta fel az algoritmus a felhasználók azonosításához \cite{sony}.
+	\item 2010-ben a Sony PlayStation 3 játékkonzol 77 millió felhasználójának adatait ellopták a támadók. A támadáshoz a cég ECDSA (Elliptic Curve Digital Signatura Algorithm) implementációjának hibáját használták ki, ami miatt ugyanazt a számot többször használta fel az algoritmus a felhasználók azonosításához \cite{sony}.
 	\item 2012-ban két kutatócsoport több olyan RSA titkosítási kulcsot hozott napvilágra, amiket addig aktívan használtak az interneten biztonságosnak hitt kulcsként, de feltörhetőek voltak amiatt, hogy nem megfelelő véletlenszám generátort használtak a kulcsok generálásakor \cite{bad-rsa}.
 	\item 2015-ben 18866 Bitcoint loptak el a Bitstamp kriptovaluta tőzsdén, ami az ott forgalomban lévő kriptopénz 12\%-át jelentette ekkor. A támadás kapcsán a véletlen számok hibás generálásának kihasználására utaló nyomok kerültek napvilágra \cite{bitstamp}.
 \end{itemize}
@@ -184,18 +82,37 @@ A fenti okok miatt egyre nő és egyre több alkalmazási területet érint a kv
 \section*{Radioaktív bomlás alapú generátorok}
 A  radioaktív bomlási folyamatok instabil atommagokban játszódnak le, amik úgy veszítenek energiát a folyamat során, hogy valamilyen részecskét (részecskéket) bocsátanak ki és más össztételű atommaggá alakulnak közben. Ezeknek a bomlási folyamatoknak a bekövetkezési ideje az előre teljesen meghatározhatatlan és kívülről befolyásolhatatlan. Ezek a folyamatok a radioaktív izotóp felezési idejével ($\lambda$) jellemezhetőek, ami azt az időtartamot jelenti, ami alatt pontosan 1/2 valószínűséggel következik be egy adott atommagban a bomlási folyamat. Ha makroszkopikus mennyiséget veszünk egy ilyen radioaktív izotópból, akkor abban az elbomlás nélkül megmaradt atomok száma exponenciálisan, gyakorlatilag folyamatosan csökken -- találóan felezési időnként feleződik.
 \par
-A radioaktív bomlások különböző kisugárzott részecskékkel járhatnak, a különböző bomlási folyamatok jellemzőek az egyes instabil izotópokra. A kibocsátott részecskék között lehetnek neutrínók, pozitronok, valamint hélium atommagnál nehezebb atommagok is, de a gyakoribb kisugárzott részecsketípusok az alfa-, béta- és gamma részecskék.
+A radioaktív bomlások különböző kisugárzott részecskékkel járhatnak, a különböző bomlási folyamatok jellemzőek az egyes instabil izotópokra. A kibocsátott részecskék között lehetnek neutrínók, pozitronok, valamint hélium atommagnál nehezebb atommagok is, de a gyakoribb kisugárzott részecsketípusok az alfa-, béta- és gamma-részecskék.
 \begin{itemize}
-	\item Az alfa részecske egy hélium atommag. Az alfa-sugárzás relatíve könnyen árnyékolható, erre egy papírlap is képes. A veszélye abban rejlik, hogy jelentős a roncsoló hatása, ezért veszélyes az élőlényekre.
-	\item A béta részecske egy elektron. Megkülönböztetnek $\beta^-$ és $\beta^+$ sugárzást, ezek elektron és pozitron (antielektron) sugárzást jelentenek sorrendben. A béta sugárzás valamivel nehezebben árnyékolható, mint az alfa, de még mindig nem túl nehezen -- például egy vékony alumíniumlemez is jó árnyékoló hatású.
+	\item Az alfa-részecske egy hélium atommag. Az alfa-sugárzás relatíve könnyen árnyékolható, erre egy papírlap is képes. A nagy roncsoló hatása miatt veszélyes az élőlényekre.
+	\item A béta-részecske egy elektron. Megkülönböztetnek $\beta^-$ és $\beta^+$ sugárzást, ezek elektron és pozitron (antielektron) sugárzást jelentenek sorrendben. A béta-sugárzás valamivel nehezebben árnyékolható, mint az alfa, de még mindig nem túl nehezen -- például egy vékony alumíniumlemez is jó árnyékoló hatású.
 	\item A gamma részecske egy nagyenergiájú foton, ami nehezen árnyékolható, de emellett nagy roncsoló hatású is, ezek kombinációja kifjezetten veszélyessé és nehezen kezelhetővé teszi. A gamma-sugárzás elleni árnyékolás körülményes, például egy vastag ólomréteg tud hatásos lenni ebben a tekintetben.
 \end{itemize}
 \par
-A
-\section*{Alagúteffektus alapú generátorok}
+Radioaktív anyagok felhasználásával elsősorban olyan véletlenszám-generátor készíthető, ami az egymás után kisugárzott részecskék detekciója között eltelt idő alapján számolja ki a véletlen biteket. A mért időintervallumok nyers számértéke közel sem egyenletes eloszlású, ami ideális lenne a véletlen bitek generálásához. Egy jobban használható megközelítésben, a detekciók közötti időt nagyon pontosan megmérjük, majd a mért számérték legkisebb helyiértékű bitjeit használjuk véletlenszerűen generált bitekként. Ha a legkisebb helyiértékű biteken ábrázolható időtartam elég kicsi a detekciók között átlagosan eltelt időhöz képest, akkor ezekből a bitekből alkotott számok eloszlása már jó közelítéssel egyenletes.
+\par
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{beta1.png}
+\end{figure}
+A fent leírt elven működő véletlenszám generátort terveztek (és fejlesztenek) egy az \textit{ETRI Journal} c. folyóiratban megjelent cikk szerzői \cite{beta}. Ez a véletlenszám generálási módszer önmagában nem újdonság, de a cikkben egy olyan megvalósításról van szó, ami a kvantum véletlenszám generálás legtöbb hátulütőjét ki tudja küszöbölni.
 
-Bibliography
-\\\\
+A cikkben leírt megvalósítás az IoT alkalmazásokat célozza, amik a különböző titkosítási protokollokhoz használnának véletlen számokat, de itt fontos a kis méret, az alacsony fogyasztás és a felhasználó egészségére jelentett veszély mértéke is. A tervezett generátor tisztán béta-sugárzó nikkel-izotópot használ sugárzó forrásnak. Azért esett a választásuk erre az anyagra, mert a tisztán béta-sugárzás miatt az eszköz könnyen leárnyékolható, valamint viszonylag nagy sugárzásérték is egészségügyileg engedélyezett ennél a konkrét izotópnál, ami gyakori részecskedetekciókat, ezáltal nagy bitsebességet eredményez.
+\par
+A cikkben a szerzők részletezik az eszköz különböző, személyreszabott igényekre való méretezésének lehetőségeit, valamint a detekciót végző áramkör felépítését és működését. A méretezéssel a fogyasztás, a fizikai kiterjedés és a bitsebesség közötti egyensúlyt lehet megtalálni különböző alkalmazások által támasztott igényeket is potenciálisan kielégítve ezzel.
+\par
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{beta2.png}
+\end{figure}
+A béta-részecskék detekciójához fordított előfeszítésű PIN diódákat használnak fel. Ezek a diódák minél nagyobb méretűek, annál több sugárzást lehet velük detektálni, de cserébe a méretükkel együtt megnő a rajtuk mérhető zaj is, ami a detekcióhoz szükséges minimális részecskeenergiát növeli. Emiatt a szerzők egy dióda-mátrixot használnak a nagyobb detekciós sebesség elérése érdekében.
+\par
+Egy kibocsájtott részecske detektálásának valószínűségét érdemes minél nagyobb szintre hozni a kialakított struktúrával, mert a nagyobb detekciós valószínűség adott sugárzási intenzitás mellett gyakoribb detekciót és ezáltal nagyobb maximális bitsebességet jelent. A sugárzó anyag által kibocsájtott részecskék energiája nem pontosan meghatározott, de az adott sugárzó anyagra jellemző eloszlású. A részecskék egy része olyan kis energiájú, hogy a detektor PIN-diódájának zajszintjéből nem kivehető az általa keltett jel, emiatt ezek nem detektálhatóak. Ha egy béta-részecske nem a detektor felé sugárzódik ki, akkor eleve 0 a detekció esélye. Ezen kívül ha a sugárzó anyag tömbjének feszínétől távol keletkezik a részecske, akkor ebből a tömbből való kijutás alatt is energiát veszít, amivel könnyen a detekciós küszöb alá kerülhet az energiája. Ezeknek a hatásoknak a kinimalizálására a sugárzó anyagot egy vékony lap formájában tartalmazza a generátor, aminek az egyik oldalát teljesen lefedve helyezkedik el közvetlenül alatta a detektor. Ezáltal a részecskék keletkezési helyének a sugárzó anyag felszínétől mért távolsága relatíve kicsi az össz térfogathoz viszonyítva, a lapos kialakítás miatt a kisugárzódás iránya miatti detekciócsökkenés elvileg csak 50\% körüli.
+\par
+Összességében körülbelül a kibocsájtott béta-részecskék 3\%-a detektálható a leírt elrendezéssel anélkül, hogy determinisztikus zaj által okozott hamis detekciók meghamisítsák a generált bitsorozatot. Ezáltal a sugárzás egészségügyi határértékeinek betartásával több Mbit/s bitsebesség érhető el a tervezett készülékkel.
+\par
+Összegzésként elmondható, hogy egy ilyen termék megnövelhetné az IoT eszközök biztonságosságát, akár új típusú autentikációs megoldásokat tenne lehetővé.
+\section*{Alagúteffektus alapú generátorok}
 \begin{thebibliography}{12}
 	\sloppy
 	\bibitem{altalanos-random} Nature Scientific Reports -- Quantum generators of random numbers \\ \url{https://www.nature.com/articles/s41598-021-95388-7}
@@ -204,5 +121,7 @@ Bibliography
 	\bibitem{bitstamp} CNN. Did a Bitcoin Exchange Just Lose 12\% of Its Bitcoins? Possible Bitstamp Hack Address Contains 18,866 Stolen BTC (2015) \\ \url{https://www.ccn.com/bitcoin-exchange-just-lose-12-bitcoins-possible-bitstamp-hack-address-contains-18866-stolen-btc/}
 	\bibitem{nist1} NIST -- A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications \\ \url{https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-22r1a.pdf}
 	\bibitem{nist2} NIST -- Recommendation for the Entropy Sources Used for Random Bit Generation \\ \url{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-90B.pdf}
+	\bibitem{beta} ETRI Journal -- A lightweight true random number generator using beta radiation for IoT applications \\ \url{https://onlinelibrary.wiley.com/doi/10.4218/etrij.2020-0119}
+	\bibitem{tunnel} Quantum random number generator based on quantum tunneling effect \\ \url{https://www.researchgate.net/publication/320890839_Quantum_random_number_generator_based_on_quantum_tunneling_effect}
 \end{thebibliography}
 \end{document}
